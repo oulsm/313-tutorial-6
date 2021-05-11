@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initialscale=1">
+ <!-- Name of the app -->
+ <title>Course Info</title>
+<body onload="initialize()">
+ <script>
+	function initialize() {
+    
+        retrieveContacts();
+    
+    }
+
+   // document.getElementById("status").innerHTML = status;
+    
+}
+
+function retrieveContacts() {
+    const xhr = new XMLHttpRequest();
+    const url = "courses.json";
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            var courses = JSON.parse(xhr.response).courses;
+            displayCourses(courses);
+
+            // Store contact data to localstorage
+           
+        }
+    };
+
+    xhr.open("get", url);
+    xhr.send();
+}
+
+function displayCourses(courses) {
+    courses.forEach(addRow);
+}
+
+function addRow(courses) {
+    var tcontent = document.getElementById("tcontent");
+    var row = tcontent.insertRow();
+
+    var nameCell = row.insertCell();
+    nameCell.setAttribute('data-label', "Code");
+    nameCell.innerHTML = courses.code;
+
+    var addressCell = row.insertCell();
+    addressCell.setAttribute('data-label', "Title");
+    addressCell.innerHTML = courses.title;
+
+    var emailCell = row.insertCell();
+    emailCell.setAttribute('data-label', "Credit");
+    emailCell.innerHTML = courses.credit;
+	
+	var emailCell = row.insertCell();
+    emailCell.setAttribute('data-label', "Category");
+    emailCell.innerHTML = courses.category;
+}
+
+ </script>
+ <!-- Add code here for part (a) -->
+ <table>
+            <caption>Course List</caption>
+            <thead>
+                <tr>
+                    <th>Course code</th>
+                    <th>Course title</th>
+					<th>Credit</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody id="tcontent">
+            </tbody>
+
+        </table>
+</body>
+</html> 

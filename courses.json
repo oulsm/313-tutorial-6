@@ -1,0 +1,28 @@
+{
+  "courses": [
+    {
+      "code": "S101F",
+      "title": "Introduction to Information Technology",
+      "credit": "5",
+      "category": "Core"
+    },
+    {
+      "code": "S202F",
+      "title": "Introduction to Computer Programming",
+      "credit": "5",
+      "category": "Core"
+    },
+    {
+      "code": "S362F",
+      "title": "Concurrent and Network Programming",
+      "credit": "5",
+      "category": "Elective"
+    },
+    {
+      "code": "S380F",
+      "title": "Web Applications: Design and Development",
+      "credit": "5",
+      "category": "Elective"
+    }
+  ]
+} 
