@@ -9,73 +9,47 @@
 <body onload="initialize()">
  <script>
 	function initialize() {
-    
-        retrieveContacts();
-    
-    }
+ if (navigator.onLine) {
+ const xhr = new XMLHttpRequest();
+ const url = "courses.json";
+ xhr.onreadystatechange = function () {
+ if (xhr.readyState === 4) {
+ var courses = JSON.parse(xhr.response).courses;
+ courses.forEach(addRow);
+ }
+ };
+ xhr.open("get", url);
+ xhr.send();
+ }
+ }
+ function addRow(course) {
+ var courselist = document.getElementById("courselist");
+ var row = courselist.insertRow();
+ var codeCell = row.insertCell();
+ codeCell.innerHTML = course.code;
+ var titleCell = row.insertCell();
+ titleCell.innerHTML = course.title;
+ var creditCell = row.insertCell();
+ creditCell.innerHTML = course.credit;
+ var categoryCell = row.insertCell();
+ categoryCell.innerHTML = course.category;
+ } 
 
-   // document.getElementById("status").innerHTML = status;
-    
-}
-
-function retrieveContacts() {
-    const xhr = new XMLHttpRequest();
-    const url = "courses.json";
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            var courses = JSON.parse(xhr.response).courses;
-            displayCourses(courses);
-
-            // Store contact data to localstorage
-           
-        }
-    };
-
-    xhr.open("get", url);
-    xhr.send();
-}
-
-function displayCourses(courses) {
-    courses.forEach(addRow);
-}
-
-function addRow(courses) {
-    var tcontent = document.getElementById("tcontent");
-    var row = tcontent.insertRow();
-
-    var nameCell = row.insertCell();
-    nameCell.setAttribute('data-label', "Code");
-    nameCell.innerHTML = courses.code;
-
-    var addressCell = row.insertCell();
-    addressCell.setAttribute('data-label', "Title");
-    addressCell.innerHTML = courses.title;
-
-    var emailCell = row.insertCell();
-    emailCell.setAttribute('data-label', "Credit");
-    emailCell.innerHTML = courses.credit;
-	
-	var emailCell = row.insertCell();
-    emailCell.setAttribute('data-label', "Category");
-    emailCell.innerHTML = courses.category;
-}
 
  </script>
  <!-- Add code here for part (a) -->
- <table>
-            <caption>Course List</caption>
-            <thead>
-                <tr>
-                    <th>Course code</th>
-                    <th>Course title</th>
-					<th>Credit</th>
-                    <th>Category</th>
-                </tr>
-            </thead>
-            <tbody id="tcontent">
-            </tbody>
-
-        </table>
+<table border="1">
+ <caption style="font-size:2em">Course List</caption>
+ <thead>
+ <tr>
+ <th>Course code</th>
+ <th>Course title</th>
+ <th>Credit</th>
+ <th>Category</th>
+ </tr>
+ </thead>
+ <tbody id="courselist">
+ </tbody>
+ </table> 
 </body>
 </html> 
